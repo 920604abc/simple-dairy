@@ -1,6 +1,11 @@
+import { useEffect } from "react";
 import "./HistoryView.css";
 
 function HistoryView() {
+  const [history, setHistory] = useState({});
+  useEffect(() => {
+    JSON.parse(localStorage.getItem("daily") || "{}");
+  }, []);
   return (
     <>
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -13,10 +18,12 @@ function HistoryView() {
         </button>
         <h4>다이어리 기록</h4>
       </div>
-      <div className="diary-item">
-        <div className="diary-date">(날짜)</div>
-        <div>(내용)</div>
+      {Object.entries(history).map(([Key, value]) => (
+      <div key={Key} className="diary-item">
+        <div className="diary-date">{Key}</div>
+        <div>{value}</div>
       </div>
+      ))}
     </>
   );
 }
