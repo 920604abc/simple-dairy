@@ -1,19 +1,20 @@
 ```mermaid
-flowchart TD
+flowchart LR
     %% 색상 정의
     classDef lock fill:#f59e0b,color:#fff,stroke:#b45309;
     classDef auto fill:#22c55e,color:#fff,stroke:#15803d;
     classDef free fill:#9ca3af,color:#fff,stroke:#4b5563;
     classDef neutral fill:#334155,color:#e2e8f0,stroke:#475569;
 
-    %% 1. 재고관리
+    %% 1️⃣ 재고관리
     A[재고관리 INV]
-    B[비재고: LOT=N / EXP=N / SER=N / NARC=비마약]
-    C[재고관리=Y → 마약류관리 NARC]
+    B[비재고<br>LOT=N / EXP=N / SER=N / NARC=비마약]:::neutral
+    C[재고관리=Y<br>→ 마약류관리 NARC]
+
     A -->|N| B
     A -->|Y| C
 
-    %% 2. 중점관리
+    %% 2️⃣ 중점관리
     C --> D[중점관리]
     D1[INV=Y]:::lock
     D2[LOT=Y]:::lock
@@ -21,7 +22,7 @@ flowchart TD
     D4[SER=Y]:::lock
     D --> D1 & D2 & D3 & D4
 
-    %% 3. 일반관리
+    %% 3️⃣ 일반관리
     C --> E[일반관리]
     E1[INV=Y]:::lock
     E2[LOT=Y]:::lock
@@ -29,7 +30,7 @@ flowchart TD
     E4[SER 선택: N 기본, Y 허용]:::free
     E --> E1 & E2 & E3 & E4
 
-    %% 4. 비마약
+    %% 4️⃣ 비마약
     C --> F[비마약]
 
     F1[일련 SER]:::neutral
@@ -49,6 +50,4 @@ flowchart TD
     F3b[EXP=N → 자유]:::free
     F3 --> F3a & F3b
 
-    %% 색상 클래스 적용
-    B:::neutral
 ```
